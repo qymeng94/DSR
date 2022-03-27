@@ -9,30 +9,30 @@ This repository is the official PyTorch implementation of paper: Training High-P
 
 ## Training
 Please run the following code. The hyperparameters in the code are the same as in the paper.
-###CIFAR-10
+### CIFAR-10
 
 	python -u cifar/main_single_gpu.py --path ./data --dataset cifar10 --model preresnet.resnet18_lif --name [checkpoint_name]
 
 	python -u cifar/main_single_gpu.py --path ./data --dataset cifar10 --model preresnet.resnet18_if --Vth 6 --alpha 0.5 --Vth_bound 0.01 --name [checkpoint_name]
 
-###CIFAR-100
+### CIFAR-100
 
 	python -u cifar/main_single_gpu.py --path ./data --dataset cifar100 --model preresnet.resnet18_lif --name [checkpoint_name]
 
 	python -u cifar/main_single_gpu.py --path ./data --dataset cifar100 --model preresnet.resnet18_if --Vth 6 --alpha 0.5 --Vth_bound 0.01 --name [checkpoint_name]
 
-###DVS-CIFAR10
+### DVS-CIFAR10
 
 	python -u cifar/main_single_gpu.py --path ./data/CIFAR10DVS --dataset CIFAR10DVS --model vgg.vgg11_lif --lr=0.05 --epochs=300 --name [checkpoint_name]
 
 	python -u cifar/main_single_gpu.py --path ./data/CIFAR10DVS --dataset CIFAR10DVS --model vgg.vgg11_if --Vth 6 --alpha=0.5 --Vth_bound 0.01 --lr=0.05 --epochs=300 --name [checkpoint_name]
 
-###Training with Multiple GPUs
+### Training with Multiple GPUs
 For the CIFAR-10, CIFAR-100, and DVS-CIFAR10 tasks, multiple GPUs can also be used. The example code is shown below.
 
 	python -u -m torch.distributed.launch --nproc_per_node [number_of_gpus] cifar/main_multiple_gpus.py --path ./data --dataset cifar10 --model preresnet.resnet18_lif --name [checkpoint_name]
 
-###ImageNet
+### ImageNet
 For the ImageNet classification task, we conduct [hybrid training](https://openreview.net/pdf?id=B1xSperKvH).
 
 First, we train an ANN.
