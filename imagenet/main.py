@@ -227,12 +227,8 @@ def main_worker(gpu, ngpus_per_node, args):
                 loc = 'cuda:{}'.format(args.gpu)
                 checkpoint = torch.load(args.checkpoint + '/imagenet/' + args.pre_train, map_location=loc)
 
-            #do not load BN parameters
-            state2 = collections.OrderedDict([(k, v) for k, v in checkpoint['state_dict'].items() if
-                                              k.find('bn1.') == -1 and k.find('bn2.') == -1 and k.find(
-                                                  'bn3.') == -1 and k.find(
-                                                  'downsample.1') == -1])
-            model.load_state_dict(state2, False)
+            state = checkpoint['state_dict']
+            model.load_state_dict(state, False)
             print("=> loaded checkpoint '{}' (epoch {})"
                   .format(args.pre_train, checkpoint['epoch']))
         else:
