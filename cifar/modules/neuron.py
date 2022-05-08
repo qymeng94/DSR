@@ -145,7 +145,7 @@ def lif_grad(Vth, delta_t, grad_output_coding, input_rate_coding, tau, timesteps
     input_grad[indexes] = grad_output_coding[indexes].clone() / tau
 
     Vth_grad = grad_output_coding.clone()
-    Vth_grad[input_rate_coding <= Vth / delta_t] = 0
+    Vth_grad[input_rate_coding <= Vth / delta_t * tau] = 0
     Vth_grad = torch.sum(Vth_grad) * delta_t
     if torch.cuda.device_count() != 1:
         Vth_grad = sum_tensor(Vth_grad)
