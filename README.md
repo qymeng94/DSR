@@ -26,6 +26,13 @@ Please run the following code. The hyperparameters in the code are the same as i
 	python -u cifar/main_single_gpu.py --path ./data/CIFAR10DVS --dataset CIFAR10DVS --model vgg.vgg11_lif --lr=0.05 --epochs=300 --name [checkpoint_name]
 
 	python -u cifar/main_single_gpu.py --path ./data/CIFAR10DVS --dataset CIFAR10DVS --model vgg.vgg11_if --Vth 6 --alpha=0.5 --Vth_bound 0.01 --lr=0.05 --epochs=300 --name [checkpoint_name]
+	
+### Low Latency Setting
+DSR can achieve good results for low latency (e.g., T=5) by tuning the hyperparameters. On CIFAR-10, the accuracy is near 94.45% (Fig.3 in the paper). The code for training with T=5 on CIFAR-10 is shown below. For other datasets, please reduce lr and tune Vth for better performance. 
+
+	python -u cifar/main_single_gpu.py --path ./data --dataset cifar10 --model preresnet.resnet18_lif --timesteps 5  --lr 0.05 --Vth 0.6 --alpha 0.5 --Vth_bound 0.001 --delta_t 0.1
+
+	python -u cifar/main_single_gpu.py --path ./data --dataset cifar10 --model preresnet.resnet18_if --timesteps 5 --lr 0.05 --Vth 6 --alpha 0.5 --Vth_bound 0.01 
 
 ### Training with Multiple GPUs
 For the CIFAR-10, CIFAR-100, and DVS-CIFAR10 tasks, multiple GPUs can also be used. The example code is shown below.
